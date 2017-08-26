@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.li.leefloatingwindow.MainActivity;
 import com.example.li.leefloatingwindow.NormalFloatingBar.FloatingWindowManager;
 import com.example.li.leefloatingwindow.NormalFloatingBar.FloatingWindowService;
 import com.example.li.leefloatingwindow.R;
@@ -38,11 +39,12 @@ public class FloatingWindowOnStatusBar extends LinearLayout
 
 
 	//分别用于记录按下，移动、抬起时相应的x、y坐标
-	private int startX, startY, moveX, moveY, stopX, stopY;
+	private int startX, startY = START_Y_INIT_VALUE, moveX, moveY, stopX, stopY;
 	private int offsetX, offsetY;
 
 	// 当在任务栏向下滑动这么多距离时候，展开任务栏
 	private static final int MAX_MOVE_OFFSET = 8;
+	private static final int START_Y_INIT_VALUE = -1024;
 
 	//用于标记悬浮窗是否有移动，当移动时候，需要展开系统的“状态栏”
 	private boolean isMove;
@@ -112,7 +114,11 @@ public class FloatingWindowOnStatusBar extends LinearLayout
 			if (!isMove) {
 				Toast.makeText(mContext, "你点击了悬浮窗", Toast.LENGTH_SHORT).show();
 				Log.i("leeTest-------->", "onClick");
-				
+
+				if(mContext != null){
+					Intent intent = new Intent(mContext, MainActivity.class);
+					mContext.startActivity(intent);
+				}
 			}
 			return super.onDown(e);
 		}
@@ -159,8 +165,11 @@ public class FloatingWindowOnStatusBar extends LinearLayout
 					if (Math.abs(offsetY) >= MAX_MOVE_OFFSET) {
 						isMove = true;
 					}
+
+					startY = START_Y_INIT_VALUE;
 					break;
 			}
+
 			return mGestureDetector.onTouchEvent(event);//将onTouchEvent交给GestureDetector处理
 		}
 	}
@@ -219,19 +228,6 @@ public class FloatingWindowOnStatusBar extends LinearLayout
 		// 悬浮窗默认显示以左上角为起始坐标
 		mLayoutParams.gravity = Gravity.LEFT | Gravity.TOP;
 		return mLayoutParams;
-	}
-
-	/**
-	 * 点击浮窗后的处理
-	 */
-	private void onClickFloatingWindow() {
-		Log.i("leeTest----->", "onClickFloatingWindow");
-		FloatingWindowManager.removeFloatingWindow(getContext());
-
-		if(mContext != null){
-			Intent intent = new Intent(mContext, FloatingWindowService.class);
-			mContext.startService(intent);
-		}
 	}
 
 	/**

@@ -46,6 +46,7 @@ public class FloatingWindowService extends Service
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
+		FloatingWindowManager.removeFloatingWindow(getApplicationContext());
 		timer.cancel();
 		timer = null;
 	}
@@ -73,15 +74,7 @@ public class FloatingWindowService extends Service
 					}
 				});
 			}
-//			// 当前界面是桌面，且有悬浮窗显示，则更新内存数据。
-//			else if (isHome() && FloatingWindowManager.isFloatingWindowShowing()) {
-//				handler.post(new Runnable() {
-//					@Override
-//					public void run() {
-//						FloatingWindowManager.updateTip("");
-//					}
-//				});
-//			}
+
 		}
 
 	}

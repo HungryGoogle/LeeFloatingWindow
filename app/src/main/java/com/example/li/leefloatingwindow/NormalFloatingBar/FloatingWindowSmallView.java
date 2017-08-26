@@ -147,7 +147,7 @@ public class FloatingWindowSmallView extends LinearLayout
 
 		if(mContext != null){
 			Intent intent = new Intent(mContext, MainActivity.class);
-			mContext.startService(intent);
+			mContext.startActivity(intent);
 		}
 	}
 
