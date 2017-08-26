@@ -1,4 +1,4 @@
-package com.example.li.leefloatingwindow;
+package com.example.li.leefloatingwindow.NormalFloatingBar;
 
 import android.content.Context;
 import android.graphics.PixelFormat;
@@ -7,7 +7,9 @@ import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
 import android.widget.TextView;
 
-public class MyWindowManager
+import com.example.li.leefloatingwindow.R;
+
+public class FloatingWindowManager
 {
 	/**
 	 * 悬浮窗View的实例
@@ -69,13 +71,12 @@ public class MyWindowManager
 	/**
 	 * 更新悬浮窗的TextView上的数据，显示内存使用的百分比。
 	 * 
-	 * @param context
-	 *            可传入应用程序上下文。
+	 * @param strTip 提示语
 	 */
-	public static void updateUsedPercent(Context context) {
+	public static void updateTip(String strTip) {
 		if (mSmallWindow != null) {
-			TextView percentView = (TextView) mSmallWindow.findViewById(R.id.percent);
-			percentView.setText(getDefaultValue(context));
+			TextView percentView = (TextView) mSmallWindow.findViewById(R.id.id_text_tip);
+			percentView.setText(strTip);
 		}
 	}
 

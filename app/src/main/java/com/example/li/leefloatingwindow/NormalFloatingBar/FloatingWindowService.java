@@ -1,4 +1,4 @@
-package com.example.li.leefloatingwindow;
+package com.example.li.leefloatingwindow.NormalFloatingBar;
 
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningTaskInfo;
@@ -56,32 +56,32 @@ public class FloatingWindowService extends Service
 		@Override
 		public void run() {
 			// 当前界面是桌面，且没有悬浮窗显示，则创建悬浮窗。
-			if (isHome() && !MyWindowManager.isFloatingWindowShowing()) {
+			if (isHome() && !FloatingWindowManager.isFloatingWindowShowing()) {
 				handler.post(new Runnable() {
 					@Override
 					public void run() {
-						MyWindowManager.createFloatingWindow(getApplicationContext());
+						FloatingWindowManager.createFloatingWindow(getApplicationContext());
 					}
 				});
 			}
 			// 当前界面不是桌面，且有悬浮窗显示，则移除悬浮窗。
-			else if (!isHome() && MyWindowManager.isFloatingWindowShowing()) {
+			else if (!isHome() && FloatingWindowManager.isFloatingWindowShowing()) {
 				handler.post(new Runnable() {
 					@Override
 					public void run() {
-						MyWindowManager.removeFloatingWindow(getApplicationContext());
+						FloatingWindowManager.removeFloatingWindow(getApplicationContext());
 					}
 				});
 			}
-			// 当前界面是桌面，且有悬浮窗显示，则更新内存数据。
-			else if (isHome() && MyWindowManager.isFloatingWindowShowing()) {
-				handler.post(new Runnable() {
-					@Override
-					public void run() {
-						MyWindowManager.updateUsedPercent(getApplicationContext());
-					}
-				});
-			}
+//			// 当前界面是桌面，且有悬浮窗显示，则更新内存数据。
+//			else if (isHome() && FloatingWindowManager.isFloatingWindowShowing()) {
+//				handler.post(new Runnable() {
+//					@Override
+//					public void run() {
+//						FloatingWindowManager.updateTip("");
+//					}
+//				});
+//			}
 		}
 
 	}

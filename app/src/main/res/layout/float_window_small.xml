@@ -12,7 +12,7 @@
 		android:layout_height="wrap_content"
 		android:src="@mipmap/ic_launcher"/>
     <TextView 
-        android:id="@+id/percent"
+        android:id="@+id/id_text_tip"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:gravity="center"

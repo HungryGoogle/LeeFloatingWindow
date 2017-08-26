@@ -1,4 +1,4 @@
-package com.example.li.leefloatingwindow;
+package com.example.li.leefloatingwindow.NormalFloatingBar;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +9,9 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.li.leefloatingwindow.MainActivity;
+import com.example.li.leefloatingwindow.R;
 
 import java.lang.reflect.Field;
 
@@ -82,8 +85,8 @@ public class FloatingWindowSmallView extends LinearLayout
 		View view = findViewById(R.id.small_window_layout);
 		viewWidth = view.getLayoutParams().width;
 		viewHeight = view.getLayoutParams().height;
-		TextView percentView = (TextView) findViewById(R.id.percent);
-		percentView.setText(MyWindowManager.getDefaultValue(context));
+		TextView percentView = (TextView) findViewById(R.id.id_text_tip);
+		percentView.setText(FloatingWindowManager.getDefaultValue(context));
 	}
 
 	@Override
@@ -140,10 +143,10 @@ public class FloatingWindowSmallView extends LinearLayout
 	 */
 	private void onClickFloatingWindow() {
 		Log.i("leeTest----->", "onClickFloatingWindow");
-		MyWindowManager.removeFloatingWindow(getContext());
+		FloatingWindowManager.removeFloatingWindow(getContext());
 
 		if(mContext != null){
-			Intent intent = new Intent(mContext, FloatingWindowService.class);
+			Intent intent = new Intent(mContext, MainActivity.class);
 			mContext.startService(intent);
 		}
 	}
